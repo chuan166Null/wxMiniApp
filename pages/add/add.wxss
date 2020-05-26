@@ -1,0 +1,59 @@
+.op-title, 
+.op-main .list {
+    padding: 0 25rpx;
+    box-sizing: border-box;
+}
+
+.op-box {
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.op-title {
+    width: 100%;
+    height: 70rpx;
+    font-size: 13px;
+    color: #999;
+    line-height: 70rpx;
+}
+
+.op-main {
+    width: 100%;
+    background-color: #fff;
+    border-top: 1rpx solid #d9d9d9;
+    border-bottom: 1rpx solid #d9d9d9;
+}
+
+.op-main .list {
+    width: 100%;
+    height: 100rpx;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.op-main .sep {
+    width: 100%;
+    height: 1rpx;
+    background-color: #d9d9d9;
+}
+
+.list .input {
+    display: flex;
+    align-items: center;
+}
+
+.list .input input {
+    width: 160rpx;
+    /* text-align: center; */
+}
+
+.input .picker {
+    margin-right: 15rpx;
+}
+
+.input .picker-t {
+    display: inline-block;
+    height: 100rpx;
+    line-height: 35rpx;
+}

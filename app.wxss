@@ -1,0 +1,13 @@
+/* 字体样式 */
+.font-big {
+  font-size: 60rpx;
+}
+.font-in {
+  font-size: 28rpx;
+}
+.font-small {
+  font-size: 24rpx;
+}
+.bgc {
+  background-color: #F8F8F8;
+}

@@ -1,0 +1,85 @@
+<view class="bgc">
+	<form>
+
+        <!-- 基础信息 -->
+		<view class="op-box">
+			<view class="op-title">
+				基础信息 -
+				<text style="color:#FF9090">必填</text>
+			</view>
+
+			<!-- 基础信息主体 -->
+			<view class="op-main">
+				<view class="list">
+					<text>卡号</text>
+					<view class="input">
+						<input type="number" maxlength="6" adjust-position placeholder="卡号前6位"></input>
+						<text style="margin:0 20rpx">—</text>
+						<input type="number" maxlength="4" adjust-position placeholder=" 卡号末4位"></input>
+					</view>
+				</view>
+
+				<!-- 分割线 -->
+				<view class="sep"></view>
+				<view class="list">
+					<text>银行</text>
+					<view class="input">
+						<input type="text" adjust-position placeholder="请输入发卡银行" style="width:230rpx"></input>
+					</view>
+				</view>
+				<view class="sep"></view>
+				<view class="list">
+					<text>账单日</text>
+					<view class="input">
+						<input type="number" maxlength="2" adjust-position placeholder="如1" style="width:60rpx"></input>
+						<text>日</text>
+					</view>
+				</view>
+				<view class="sep"></view>
+				<view class="list">
+					<text>还款日</text>
+					<view class="input">
+						<view class="picker" bindtap="clickPickerChange" data-index="{{opIndex}}">
+							<text class="picker-t">
+							    {{opArray[opIndex].name}}
+							</text>
+						</view>
+						<input type="number" maxlength="2" adjust-position placeholder="如1" style="width:60rpx"></input>
+						<text>日</text>
+					</view>
+				</view>
+			</view>
+		</view>
+
+        <!-- 还款提醒 -->
+		<view class="op-box">
+			<view class="op-title">
+				消息提醒 -
+				<text style="color:#9090FF">选填</text>
+			</view>
+			<view class="op-main">
+				<view class="list">
+					<text>出账提醒（单次）</text>
+					<view class="input">
+						<picker class="picker" bindchange="dePickerChange" value="{{dePickerIndex}}" range="{{remindDay}}">
+							<text class="picker-t">
+							{{remindDay[dePickerIndex]}}
+							</text>
+						</picker>
+					</view>
+				</view>
+                <view class="sep"></view>
+				<view class="list">
+					<text>还款提醒（持续至还清）</text>
+					<view class="input">
+						<picker class="picker" bindchange="rePickerChange" value="{{rePickerIndex}}" range="{{remindDay}}">
+							<text class="picker-t">
+							{{remindDay[rePickerIndex]}}
+							</text>
+						</picker>
+					</view>
+				</view>
+			</view>
+		</view>
+	</form>
+</view>

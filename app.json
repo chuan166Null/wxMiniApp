@@ -1,0 +1,29 @@
+{
+  "pages": [
+    "pages/index/index",
+    "pages/add/add",
+    "pages/promo/promo",
+    "pages/logs/logs"
+  ],
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#87CEEB",
+    "navigationBarTitleText": "卡包",
+    "navigationBarTextStyle": "black"
+  },
+  "tabBar": {
+    "list": [
+      {
+        "selectedColor": "#11cd6e",
+        "pagePath": "pages/index/index",
+        "text": "我的卡账"
+      },
+      {
+        "pagePath": "pages/promo/promo",
+        "text": "银行活动"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

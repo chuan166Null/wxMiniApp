@@ -1,0 +1,116 @@
+<view class="home bgc">
+	<view class="home-title font-in">
+		<view class="acc">
+			<view>
+				机构总数：
+				<text>0</text>
+			</view>
+			<view>
+				账户总数：
+				<text>0</text>
+			</view>
+		</view>
+		<view class="quota">
+			<text>总授信额度</text>
+			<text>0</text>
+		</view>
+	</view>
+	<view class="line"></view>
+	<view class="content">
+		<movable-area class="movable-card">
+			<movable-view animation="{{animation}}" direction="horizontal" inertia="{{true}}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" style="transform: translateX({{slideX}});">
+				<view class="card">
+					<view class="card-title font-in">
+						<text>招商银行</text>
+						<text>银联白金卡</text>
+					</view>
+					<view class="card-main">
+						<view class="card-acc">
+							<view class="card-day font-big">9</view>
+							<view class="datearea">
+								<view class="datetxt font-small">天后出账</view>
+								<view class="dateval font-small">
+									1月1日
+									<text style="color: #01b800">卡</text>
+								</view>
+							</view>
+						</view>
+						<view class="paymentinfo">
+							<view class="card-day font-big">3</view>
+							<view class="datearea">
+								<view class="datetxt font-small">天后还款</view>
+								<view class="dateval font-small">
+									1月4日
+									<text style="color: #01b800">+3</text>
+								</view>
+							</view>
+						</view>
+					</view>
+					<navigator class="edit-card" bindtap="onclick" url="../add/add">编辑卡片</navigator>
+				</view>
+			</movable-view>
+		</movable-area>
+		<!-- <view class="line"></view>
+		<view class="card">
+			<view class="card-title font-in">
+				<text>招商银行</text>
+				<text>银联白金卡</text>
+			</view>
+			<view class="card-main">
+				<view class="card-acc">
+					<view class="card-day font-big">明</view>
+					<view class="datearea">
+						<view class="datetxt font-small">天出账</view>
+						<view class="dateval font-small">
+							10月10日
+							<text style="color: #01b800">户</text>
+						</view>
+					</view>
+				</view>
+				<view class="paymentinfo">
+					<view class="card-day font-big">35</view>
+					<view class="datearea">
+						<view class="datetxt font-small">天后还款</view>
+						<view class="dateval font-small">
+							11月14日
+							<text style="color: #01b800">+3</text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view>
+		<view class="line"></view>
+		<view class="card">
+			<view class="card-title font-in">
+				<text>招商银行</text>
+				<text>银联白金卡</text>
+			</view>
+			<view class="card-main">
+				<view class="card-acc">
+					<view class="card-day font-big">29</view>
+					<view class="datearea">
+						<view class="datetxt font-small">天后出账</view>
+						<view class="dateval font-small">
+							7月17日
+							<text style="color: #01b800">卡</text>
+						</view>
+					</view>
+				</view>
+				<view class="paymentinfo">
+					<view class="card-day font-big">明</view>
+					<view class="datearea">
+						<view class="datetxt font-small">天还款</view>
+						<view class="dateval font-small">
+							1月4日
+							<text style="color: #01b800">+3</text>
+						</view>
+					</view>
+				</view>
+			</view>
+		</view> -->
+		<view class="line"></view>
+		<navigator class="btn" url="../add/add">
+			+添加新卡片
+		</navigator>
+	</view>
+</view>
