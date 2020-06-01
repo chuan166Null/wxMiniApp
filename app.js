@@ -1,0 +1,25 @@
+App({
+    index: null,
+    edit: false,
+    globalData: {
+        id: null,
+        befor: null,
+        after: null,
+        bank: null,
+        billDate: null,
+        billDay: null,
+        repDate: null,
+        repDay: null,
+        reDay: null,
+        deDay: null,
+        kind: null,
+        setName: null,
+        RMB: null,
+        yearFee: null,
+        num: null,
+        note: null,
+        opIndex: null,
+        coIndex: null,
+    },
+
+})

@@ -1,85 +1,250 @@
-<view class="bgc">
-	<form>
+<!-- 提示弹窗 -->
+<template name="toast">
+	<view class="toast-box" wx:if="{{ isShow }}">
+		<view class="box-in">
+			<image src="{{ iconFont }}"></image>
+			<text>
+			{{ txt }}
+			</text>
+		</view>
+	</view>
+</template>
 
-        <!-- 基础信息 -->
-		<view class="op-box">
-			<view class="op-title">
+<view class="bgc">
+
+	<!-- 缓存空间提醒 -->
+	<view class="cache title">
+		<text>已用缓存：{{ cardDcuS }} KB</text>
+		<text>可用缓存：{{ cardDliS }} KB</text>
+	</view>
+
+	<form bindsubmit="addSubmit">
+		<template is="toast" data="{{ isShow, iconFont, txt }}"></template>
+
+		<!-- 基础信息 -->
+		<view class="basis box">
+			<view class="title">
 				基础信息 -
 				<text style="color:#FF9090">必填</text>
 			</view>
 
 			<!-- 基础信息主体 -->
-			<view class="op-main">
+			<view class="main">
 				<view class="list">
 					<text>卡号</text>
-					<view class="input">
-						<input type="number" maxlength="6" adjust-position placeholder="卡号前6位"></input>
-						<text style="margin:0 20rpx">—</text>
-						<input type="number" maxlength="4" adjust-position placeholder=" 卡号末4位"></input>
-					</view>
+					<block>
+						<view class="input" wx:if="{{ edit }}">
+							<input name="befor" type="number" maxlength="6" adjust-position="{{ true }}" cursor-spacing="30" placeholder="卡号前6位" value="{{ cardData.befor }}"></input>
+							<text style="margin:0 15rpx">—</text>
+							<input name="after" type="number" maxlength="4" adjust-position="{{ true }}" cursor-spacing="30" placeholder=" 卡号末4位" value="{{ cardData.after }}"></input>
+						</view>
+						<view class="input" wx:else>
+							<input name="befor" type="number" maxlength="6" adjust-position="{{ true }}" cursor-spacing="30" placeholder="卡号前6位"></input>
+							<text style="margin:0 20rpx">—</text>
+							<input name="after" type="number" maxlength="4" adjust-position="{{ true }}" cursor-spacing="30" placeholder=" 卡号末4位"></input>
+						</view>
+					</block>
 				</view>
 
 				<!-- 分割线 -->
 				<view class="sep"></view>
 				<view class="list">
 					<text>银行</text>
-					<view class="input">
-						<input type="text" adjust-position placeholder="请输入发卡银行" style="width:230rpx"></input>
-					</view>
+					<block>
+						<view class="input" wx:if="{{ edit }}">
+							<input name="bank" type="text" adjust-position="{{ true }}" cursor-spacing="30" placeholder="请输入发卡银行" style="width:230rpx" value="{{ cardData.bank }}"></input>
+						</view>
+						<view class="input" wx:else>
+							<input name="bank" type="text" adjust-position="{{ true }}" cursor-spacing="30" placeholder="请输入发卡银行" style="width:230rpx" value="{{ bank }}"></input>
+						</view>
+					</block>
 				</view>
 				<view class="sep"></view>
 				<view class="list">
 					<text>账单日</text>
-					<view class="input">
-						<input type="number" maxlength="2" adjust-position placeholder="如1" style="width:60rpx"></input>
-						<text>日</text>
-					</view>
+					<block>
+						<view class="input" wx:if="{{ edit }}">
+							<input name="billDay" type="number" maxlength="2" adjust-position="{{ true }}" cursor-spacing="30" placeholder="如1" style="width:60rpx" value="{{ cardData.billDay }}"></input>
+							<text>日</text>
+						</view>
+						<view class="input" wx:else>
+							<input name="billDay" type="number" maxlength="2" adjust-position="{{ true }}" cursor-spacing="30" placeholder="如1" style="width:60rpx" value="{{ billDay }}"></input>
+							<text>日</text>
+						</view>
+					</block>
 				</view>
 				<view class="sep"></view>
 				<view class="list">
 					<text>还款日</text>
-					<view class="input">
-						<view class="picker" bindtap="clickPickerChange" data-index="{{opIndex}}">
-							<text class="picker-t">
-							    {{opArray[opIndex].name}}
-							</text>
+					<block>
+						<view class="input" wx:if="{{ edit }}">
+							<view class="tab-change" bindtap="clickTabChangeDay" data-index="{{opIndex}}">
+								<text class="tab-t">
+								{{opArray[opIndex].name}}
+								</text>
+							</view>
+							<input name="repDay" type="number" maxlength="2" adjust-position="{{ true }}" cursor-spacing="30" placeholder="如1" style="width:60rpx" value="{{ cardData.repDay }}"></input>
+							<text>日</text>
 						</view>
-						<input type="number" maxlength="2" adjust-position placeholder="如1" style="width:60rpx"></input>
-						<text>日</text>
-					</view>
+						<view class="input" wx:else>
+							<view class="tab-change" bindtap="clickTabChangeDay" data-index="{{opIndex}}">
+								<text class="tab-t">
+								{{opArray[opIndex].name}}
+								</text>
+							</view>
+							<input name="repDay" type="number" maxlength="2" adjust-position="{{ true }}" cursor-spacing="30" placeholder="如1" style="width:60rpx" value="{{ repDay }}"></input>
+							<text>日</text>
+						</view>
+					</block>
 				</view>
 			</view>
 		</view>
 
-        <!-- 还款提醒 -->
-		<view class="op-box">
-			<view class="op-title">
+		<!-- 出账&还款提醒 -->
+		<view class="remind box">
+			<view class="title">
 				消息提醒 -
 				<text style="color:#9090FF">选填</text>
 			</view>
-			<view class="op-main">
+			<view class="main">
 				<view class="list">
 					<text>出账提醒（单次）</text>
-					<view class="input">
-						<picker class="picker" bindchange="dePickerChange" value="{{dePickerIndex}}" range="{{remindDay}}">
-							<text class="picker-t">
-							{{remindDay[dePickerIndex]}}
-							</text>
-						</picker>
-					</view>
+					<block>
+						<view class="input" wx:if="{{ edit }}">
+							<picker name="reDay" class="picker" bindchange="dePickerChange" value="{{dePickerIndex}}" range="{{remindDay}}">
+								<text class="picker-t">
+								{{remindDay[dePickerIndex]}}
+								</text>
+							</picker>
+						</view>
+						<view class="input" wx:else>
+							<picker name="reDay" class="picker" bindchange="dePickerChange" value="{{dePickerIndex}}" range="{{remindDay}}">
+								<text class="picker-t">
+								{{remindDay[dePickerIndex]}}
+								</text>
+							</picker>
+						</view>
+					</block>
 				</view>
-                <view class="sep"></view>
+				<view class="sep"></view>
 				<view class="list">
 					<text>还款提醒（持续至还清）</text>
-					<view class="input">
-						<picker class="picker" bindchange="rePickerChange" value="{{rePickerIndex}}" range="{{remindDay}}">
-							<text class="picker-t">
-							{{remindDay[rePickerIndex]}}
-							</text>
-						</picker>
-					</view>
+					<block>
+						<view class="input" wx:if="{{ edit }}">
+							<picker name="deDay" class="picker" bindchange="rePickerChange" value="{{rePickerIndex}}" range="{{remindDay}}">
+								<text class="picker-t">
+								{{remindDay[rePickerIndex]}}
+								</text>
+							</picker>
+						</view>
+						<view class="input" wx:else>
+							<picker name="deDay" class="picker" bindchange="rePickerChange" value="{{rePickerIndex}}" range="{{remindDay}}">
+								<text class="picker-t">
+								{{remindDay[rePickerIndex]}}
+								</text>
+							</picker>
+						</view>
+					</block>
 				</view>
 			</view>
+		</view>
+
+		<!-- 附加信息 -->
+		<view class="attach box">
+			<view class="title">
+				附加信息 -
+				<text style="color:#9090FF">选填</text>
+			</view>
+			<view class="main">
+				<view class="list">
+					<text>卡片种类</text>
+					<block>
+						<view class="input" wx:if="{{ edit }}">
+							<input name="kind" type="text" maxlength="6" adjust-position="{{ true }}" cursor-spacing="30" placeholder="请输入卡片种类" style="width:240rpx" value="{{ cardData.kind }}"></input>
+						</view>
+						<view class="input" wx:else>
+							<input name="kind" type="text" maxlength="6" adjust-position="{{ true }}" cursor-spacing="30" placeholder="请输入卡片种类" style="width:240rpx" value="{{ kind }}"></input>
+						</view>
+					</block>
+				</view>
+				<view class="sep"></view>
+				<view class="list">
+					<text>自定义名称</text>
+					<block>
+						<view class="input" wx:if="{{ edit }}">
+							<input name="setName" type="text" maxlength="10" adjust-position="{{ true }}" cursor-spacing="30" placeholder="例如招商银行银联白金" style="width:370rpx" value="{{ cardData.setName }}"></input>
+						</view>
+						<view class="input" wx:else>
+							<input name="setName" type="text" maxlength="10" adjust-position="{{ true }}" cursor-spacing="30" placeholder="例如招商银行银联白金" style="width:370rpx" value="{{ setName }}"></input>
+						</view>
+					</block>
+				</view>
+				<view class="sep"></view>
+				<view class="list">
+					<text>额度</text>
+					<block>
+						<view class="input" wx:if="{{ edit }}">
+							<input name="RMB" type="number" maxlength="8" adjust-position="{{ true }}" cursor-spacing="30" placeholder="信用额度" style="width:160rpx" value="{{ cardData.RMB }}"></input>
+							<text style="margin-left:10rpx">元</text>
+						</view>
+						<view class="input" wx:else>
+							<input name="RMB" type="number" maxlength="8" adjust-position="{{ true }}" cursor-spacing="30" placeholder="信用额度" style="width:160rpx" value="{{ RMB }}"></input>
+							<text style="margin-left:10rpx">元</text>
+						</view>
+					</block>
+				</view>
+				<view class="sep"></view>
+				<view class="list">
+					<text>年费</text>
+					<block>
+						<view class="input" wx:if="{{ edit }}">
+							<input name="yearFee" type="number" maxlength="7" adjust-position="{{ true }}" cursor-spacing="30" placeholder="如200" style="width:130rpx; text-align:center" value="{{ cardData.yearFee }}"></input>
+							<text style="margin:0 10rpx;">元</text>
+							<view class="tab-change" bindtap="clickTabChangeCost" data-index="{{coIndex}}">
+								<text class="tab-t">
+								{{coArray[coIndex].symbol}}刷满
+								</text>
+							</view>
+							<input name="num" type="number" maxlength="7" adjust-position="{{ true }}" cursor-spacing="30" placeholder="如5" style="width:130rpx; text-align:center; margin-right:10rpx" value="{{ cardData.num }}"></input>
+							<text>{{coArray[coIndex].str}}可免</text>
+						</view>
+						<view class="input" wx:else>
+							<input name="yearFee" type="number" maxlength="7" adjust-position="{{ true }}" cursor-spacing="30" placeholder="如200" style="width:130rpx; text-align:center" value="{{ yearFee }}"></input>
+							<text style="margin:0 10rpx;">元</text>
+							<view class="tab-change" bindtap="clickTabChangeCost" data-index="{{coIndex}}">
+								<text class="tab-t">
+								{{coArray[coIndex].symbol}}刷满
+								</text>
+							</view>
+							<input name="num" type="number" maxlength="7" adjust-position="{{ true }}" cursor-spacing="30" placeholder="如5" style="width:130rpx; text-align:center; margin-right:10rpx" value="{{ num }}"></input>
+							<text>{{coArray[coIndex].str}}可免</text>
+						</view>
+					</block>
+				</view>
+				<view class="sep"></view>
+				<view class="list">
+					<text>备注</text>
+					<block>
+						<view class="input" wx:if="{{ edit }}">
+							<input name="note" type="text" adjust-position="{{ true }}" cursor-spacing="30" placeholder="如上次提额时间" style="width:370rpx" value="{{ cardData.note }}"></input>
+						</view>
+						<view class="input" wx:else>
+							<input name="note" type="text" adjust-position="{{ true }}" cursor-spacing="30" placeholder="如上次提额时间" style="width:370rpx" value="{{ note }}"></input>
+						</view>
+					</block>
+				</view>
+			</view>
+		</view>
+		<view id="add-btn">
+			<button class="btn" form-type="submit">
+				保存
+			</button>
+			<button wx:if="{{ edit }}" class="btn" style="background-color:#F03A17;" bindtap="removeStorageSync">
+				删除此卡
+			</button>
+			<button class="btn" style="background-color:#fff; color:#333;" bindtap="back">
+				取消
+			</button>
 		</view>
 	</form>
 </view>

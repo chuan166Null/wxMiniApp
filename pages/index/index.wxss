@@ -1,7 +1,47 @@
+.toast-box {
+  width: 100%;
+  height: 1200rpx;
+  background-color: rgba(250, 250, 250, .8);
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999;
+}
+
+.box-in {
+  width: 300rpx;
+  height: 300rpx;
+  border-radius: 30rpx;
+  background-color: rgba(217, 217, 217, .9);
+  position: fixed;
+  top: 33%;
+  left: 33%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.box-in image {
+  width: 45%;
+  height: 45%;
+}
+.box-in text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 80%;
+  height: 30%;
+  text-align: center;
+  font-size: 14px;
+  color: #333;
+  margin-top: -5rpx;
+}
+
 .home-title {
   width: 100%;
   height: 200rpx;
-  background-color: skyblue;
+  background-color: #4CA6ED;
   border-bottom: 2rpx solid #666;
   display: flex;
   align-items: center;
@@ -9,7 +49,8 @@
 }
 .home-title .acc,
 .home-title .quota {
-  width: 230rpx;
+  width: 265rpx;
+  font-size: 17px;
   line-height: 55rpx;
   padding: 12rpx;
   box-sizing: border-box;
@@ -18,7 +59,8 @@
   align-items: center;
   flex-direction: column;
   border-radius: 17rpx;
-  background-color: rgba(255, 255, 255, 0.6);
+  color: #FFFAFB;
+  background-color: rgba(80, 80, 80, 0.3);
 }
 .line {
   width: 100%;
@@ -35,16 +77,19 @@
   box-sizing: border-box;
   background-color: white;
 }
-movable-area {
+.movable-card {
   width: 750rpx;
   height: 170rpx;
   overflow: hidden;
+  position: relative;
+  top: 0;
+  left: 0;
 }
 movable-view {
   width: 900rpx;
   height: 170rpx;
 }
-.edit-card {
+.movable-card .edit-card {
   width: 150rpx;
   height: 170rpx;
   font-size: 13px;
@@ -82,16 +127,4 @@ movable-view {
 }
 .dateval {
   color: #909090;
-}
-.btn {
-  width: 100%;
-  height: 100rpx;
-  background-color: #1aad19;
-  border: 1rpx solid #1aad19;
-  box-sizing: border-box;
-  border-radius: 17rpx;
-  font-size: 40rpx;
-  color: white;
-  text-align: center;
-  line-height: 100rpx;
 }

@@ -1,15 +1,26 @@
-.op-title, 
-.op-main .list {
+.bgc {
+    position: relative;
+}
+
+.cache {
+    display: flex;
+    justify-content: space-between;
+    border: 1rpx solid #d9d9d9;
+    background-color: #fff;
+}
+
+.title, 
+.main .list {
     padding: 0 25rpx;
     box-sizing: border-box;
 }
 
-.op-box {
+.box {
     width: 100%;
     box-sizing: border-box;
 }
 
-.op-title {
+.title {
     width: 100%;
     height: 70rpx;
     font-size: 13px;
@@ -17,14 +28,14 @@
     line-height: 70rpx;
 }
 
-.op-main {
+.main {
     width: 100%;
     background-color: #fff;
     border-top: 1rpx solid #d9d9d9;
     border-bottom: 1rpx solid #d9d9d9;
 }
 
-.op-main .list {
+.main .list {
     width: 100%;
     height: 100rpx;
     display: flex;
@@ -32,7 +43,7 @@
     justify-content: space-between;
 }
 
-.op-main .sep {
+.main .sep {
     width: 100%;
     height: 1rpx;
     background-color: #d9d9d9;
@@ -41,19 +52,70 @@
 .list .input {
     display: flex;
     align-items: center;
+    text-align: center;
 }
 
-.list .input input {
+.basis .input input {
     width: 160rpx;
-    /* text-align: center; */
+    text-align: end;
 }
 
-.input .picker {
+.tab-change {
     margin-right: 15rpx;
 }
 
-.input .picker-t {
+.tab-t {
     display: inline-block;
     height: 100rpx;
     line-height: 35rpx;
+}
+
+.attach .input input {
+    text-align: end;
+}
+
+#add-btn .btn {
+    width: 90%;
+    margin: 30rpx auto;
+}
+
+
+.toast-box {
+    width: 100%;
+    height: 1200rpx;
+    background-color: rgba(250, 250, 250, .8);
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 999;
+}
+
+.box-in {
+    width: 300rpx;
+    height: 300rpx;
+    border-radius: 30rpx;
+    background-color: rgba(217, 217, 217, .9);
+    position: fixed;
+    top: 33%;
+    left: 33%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.box-in image {
+    width: 45%;
+    height: 45%;
+}
+.box-in text {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 80%;
+    height: 30%;
+    text-align: center;
+    font-size: 14px;
+    color: #333;
+    margin-top: -5rpx;
 }

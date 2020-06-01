@@ -1,4 +1,72 @@
+<!-- <template name="billDate">
+	<view class="card-day font-big" wx:for="{{ q }}" wx:key="id">{{ q }}</view>
+</template> -->
+
+<!-- <template name="repDate">
+	<view class="card-day font-big" wx:for="{{ repDate }}" wx:key="id">{{ item.repDate }}</view>
+</template> -->
+
+<template name="cardList">
+	<view wx:for="{{ cardList }}" wx:for-item="cl" wx:key="id">
+		<movable-area class="movable-card">
+			<movable-view animation="{{ aniData }}" direction="horizontal" >
+				<view class="card">
+					<view class="card-title font-in">
+						<text>{{ cl.bank }} {{ cl.after }}</text>
+						<text>{{ cl.kind }}</text>
+					</view>
+					<view class="card-main">
+						<view class="card-acc">
+							<view class="card-day font-big" wx:if="{{ billDate[index].billD.calD < 3 }}">{{ billDate[index].billD.info }}</view>
+							<view class="card-day font-big" wx:else>{{ billDate[index].billD.calD }}</view>
+							<!-- <template is="billDate" data="{{ billDay }}"></template> -->
+							<view class="datearea">
+								<view class="datetxt font-small" wx:if="{{ billDate[index].billD.calD < 3 }}">{{ billDate[index].billD.t }}出账</view>
+								<view class="datetxt font-small" wx:else>{{ billDate[index].billD.info }}出账</view>
+								<view class="dateval font-small">
+									{{ billDate[index].billD.month }} 月 {{ cl.billDay }} 日
+									<!-- <text style="color: #01b800">卡</text> -->
+								</view>
+							</view>
+						</view>
+						<view class="paymentinfo">
+							<view class="card-day font-big" wx:if="{{ repDate[index].repD.calD < 3 }}">{{ repDate[index].repD.info }}</view>
+							<view class="card-day font-big" wx:else>{{ repDate[index].repD.calD }}</view>
+							<!-- <template is="repDate" data="{{ repDate }}"></template> -->
+							<view class="datearea">
+								<view class="datetxt font-small" wx:if="{{ repDate[index].repD.calD < 3 }}">{{ repDate[index].repD.t }}还款</view>
+								<view class="datetxt font-small" wx:else>{{ repDate[index].repD.info }}还款</view>
+								<view class="dateval font-small">
+									{{ repDate[index].repD.month }} 月 {{ cl.repDay }} 日
+									<!-- <text style="color: #01b800">+3</text> -->
+								</view>
+							</view>
+						</view>
+					</view>
+				</view>
+					<navigator data-index="{{ cl.id }}" class="edit-card" bindtap="onClick" url="../add/add">编辑卡片</navigator>
+			</movable-view>
+		</movable-area>
+		<view class="line"></view>
+	</view>
+</template>
+
+<!-- 提示弹窗 -->
+<template name="toast">
+	<view class="toast-box" wx:if="{{ isShow }}">
+		<view class="box-in">
+			<image src="{{ iconFont }}"></image>
+			<text>
+			{{ txt }}
+			</text>
+		</view>
+	</view>
+</template>
+
 <view class="home bgc">
+
+	<template is="toast" data="{{ isShow, iconFont, txt }}"></template>
+
 	<view class="home-title font-in">
 		<view class="acc">
 			<view>
@@ -12,104 +80,50 @@
 		</view>
 		<view class="quota">
 			<text>总授信额度</text>
-			<text>0</text>
+			<text>{{ RMB }}</text>
 		</view>
 	</view>
 	<view class="line"></view>
 	<view class="content">
-		<movable-area class="movable-card">
-			<movable-view animation="{{animation}}" direction="horizontal" inertia="{{true}}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" style="transform: translateX({{slideX}});">
-				<view class="card">
-					<view class="card-title font-in">
-						<text>招商银行</text>
-						<text>银联白金卡</text>
-					</view>
-					<view class="card-main">
-						<view class="card-acc">
-							<view class="card-day font-big">9</view>
-							<view class="datearea">
-								<view class="datetxt font-small">天后出账</view>
-								<view class="dateval font-small">
-									1月1日
-									<text style="color: #01b800">卡</text>
+		<template is="cardList" data="{{ cardList, billDate, repDate }}"></template>
+
+		<!-- <view wx:for="{{ cardList }}" wx:key="id">
+			<movable-area class="movable-card">
+				<movable-view animation="{{animation}}" direction="horizontal" inertia="{{true}}" bindtouchstart="touchstart" bindtouchmove="touchmove" bindtouchend="touchend" style="transform: translateX({{slideX}});">
+					<view class="card">
+						<view class="card-title font-in">
+							<text>{{ item.bank }}</text>
+							<text>{{ cardList[cLlength].kind }}</text>
+						</view>
+						<view class="card-main">
+							<view class="card-acc">
+								<view class="card-day font-big">{{ cardList[0].billDate }}</view>
+								<view class="datearea">
+									<view class="datetxt font-small">天出账</view>
+									<view class="dateval font-small">
+										{{ cardList[0].billDay }}
+										<text style="color: #01b800">卡</text>
+									</view>
+								</view>
+							</view>
+							<view class="paymentinfo">
+								<view class="card-day font-big">{{ cardList[0].repDate }}</view>
+								<view class="datearea">
+									<view class="datetxt font-small">天还款</view>
+									<view class="dateval font-small">
+										{{ cardList[0].repDay }}
+										<text style="color: #01b800">+3</text>
+									</view>
 								</view>
 							</view>
 						</view>
-						<view class="paymentinfo">
-							<view class="card-day font-big">3</view>
-							<view class="datearea">
-								<view class="datetxt font-small">天后还款</view>
-								<view class="dateval font-small">
-									1月4日
-									<text style="color: #01b800">+3</text>
-								</view>
-							</view>
-						</view>
+						<navigator class="edit-card" bindtap="onclick" url="../add/add">编辑卡片</navigator>
 					</view>
-					<navigator class="edit-card" bindtap="onclick" url="../add/add">编辑卡片</navigator>
-				</view>
-			</movable-view>
-		</movable-area>
-		<!-- <view class="line"></view>
-		<view class="card">
-			<view class="card-title font-in">
-				<text>招商银行</text>
-				<text>银联白金卡</text>
-			</view>
-			<view class="card-main">
-				<view class="card-acc">
-					<view class="card-day font-big">明</view>
-					<view class="datearea">
-						<view class="datetxt font-small">天出账</view>
-						<view class="dateval font-small">
-							10月10日
-							<text style="color: #01b800">户</text>
-						</view>
-					</view>
-				</view>
-				<view class="paymentinfo">
-					<view class="card-day font-big">35</view>
-					<view class="datearea">
-						<view class="datetxt font-small">天后还款</view>
-						<view class="dateval font-small">
-							11月14日
-							<text style="color: #01b800">+3</text>
-						</view>
-					</view>
-				</view>
-			</view>
-		</view>
-		<view class="line"></view>
-		<view class="card">
-			<view class="card-title font-in">
-				<text>招商银行</text>
-				<text>银联白金卡</text>
-			</view>
-			<view class="card-main">
-				<view class="card-acc">
-					<view class="card-day font-big">29</view>
-					<view class="datearea">
-						<view class="datetxt font-small">天后出账</view>
-						<view class="dateval font-small">
-							7月17日
-							<text style="color: #01b800">卡</text>
-						</view>
-					</view>
-				</view>
-				<view class="paymentinfo">
-					<view class="card-day font-big">明</view>
-					<view class="datearea">
-						<view class="datetxt font-small">天还款</view>
-						<view class="dateval font-small">
-							1月4日
-							<text style="color: #01b800">+3</text>
-						</view>
-					</view>
-				</view>
-			</view>
+				</movable-view>
+			</movable-area>
 		</view> -->
-		<view class="line"></view>
-		<navigator class="btn" url="../add/add">
+
+		<navigator class="btn" bindtap="add" url="../add/add">
 			+添加新卡片
 		</navigator>
 	</view>
