@@ -1,2 +1,11 @@
 <!--pages/promo/promo.wxml-->
-<text>pages/promo/promo.wxml</text>
+<view class="box">
+	<view class="txt">
+		<text>各银行信用卡活动整理，没有找到接口，先空着。</text>
+	</view>
+	<view class="info">
+		<text class="mn-title">( 厚着脸皮伸手要 ^_^~~ )</text>
+		<text class="min">要是有愿意告诉我查找免费接口方法的，可以给我发邮件：</text>
+		<text class="email">fireelight.sc@qq.com</text>
+	</view>
+</view>

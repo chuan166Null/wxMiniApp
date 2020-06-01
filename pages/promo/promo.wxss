@@ -1,1 +1,27 @@
 /* pages/promo/promo.wxss */
+.box {
+    width: 80%;
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+.txt {
+    width: 100%;
+    font-size: 18px;
+    margin: 80rpx auto;
+}
+.info {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.mn-title {
+    font-size: 17px;
+    font-weight: 500;
+    margin-bottom: 20rpx;
+}
+.min {
+    margin-bottom: 15rpx;
+}
