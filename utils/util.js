@@ -28,13 +28,13 @@ const calDate = function (year, month1, setD) {
     let endTime = formatTime(new Date(item));
     endTime = Date.parse(endTime);
     let endDate = Math.floor((endTime - nowTime) / (1000 * 60 * 60 * 24)) + 1;
-    console.log(endDate)
+    // console.log(endDate)
     return endDate;
   };
   let endDate = eDate();
   if (endDate < 0) {
     month1++;
-    console.log(endDate)
+    // console.log(endDate)
     let endDate = calDate(year, month1, setD);
     return endDate
   }

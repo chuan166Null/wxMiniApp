@@ -179,9 +179,6 @@ Page({
         if (a.edit) {
             var cardKey = String(a.index);
             var cardId = parseInt(cardKey);
-            wx.setNavigationBarTitle({
-              title: '卡包/修改卡片',
-            })
         } else {
             cardKey = false;
             cardId = false;
@@ -257,7 +254,7 @@ Page({
 
                                 // 重新获取本地数据的长度
                                 let qL = wx.getStorageInfoSync().keys.length;
-                                if (qL = qqL) {
+                                if (qL == qqL) {
                                     wx.removeStorage({
                                         key: String(qqL),
                                     });
@@ -312,6 +309,9 @@ Page({
         // 判断入口按钮，回显表单数据
         let ec = that.data.edit;
         if (ec) {
+            wx.setNavigationBarTitle({
+                title: '卡包/修改卡片',
+              });
             let cardIndex = String(a.index);
             try {
                 let card = wx.getStorageSync(cardIndex);

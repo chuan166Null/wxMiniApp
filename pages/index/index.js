@@ -223,7 +223,7 @@ Page({
     } catch (error) {
 
     }
-    console.log(that.data)
+    // console.log(that.data)
   },
 
   /**
