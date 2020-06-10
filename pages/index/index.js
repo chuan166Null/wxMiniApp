@@ -42,52 +42,53 @@ Page({
     }, 2000);
   },
 
-  // 开始按下的位置
-  touchstart: function (e) {
-    let event = e.touches[0].clientX;
-    let start = Math.ceil(event);
-    this.setData({
-      touchS: start,
-    })
-  },
+  // 以下注释：未实现的卡片滑动动画
+  // // 开始按下的位置
+  // touchstart: function (e) {
+  //   let event = e.touches[0].clientX;
+  //   let start = Math.ceil(event);
+  //   this.setData({
+  //     touchS: start,
+  //   })
+  // },
 
-  // 移动中变化的位置
-  touchmove: function (e) {
-    let event = e.touches[0].clientX
-    let move = Math.ceil(event);
-    this.setData({
-      touchE: move
-    })
+  // // 移动中变化的位置
+  // touchmove: function (e) {
+  //   let event = e.touches[0].clientX
+  //   let move = Math.ceil(event);
+  //   this.setData({
+  //     touchE: move
+  //   })
 
-  },
+  // },
 
-  // 手指抬起结束移动的位置
-  touchend: function () {
+  // // 手指抬起结束移动的位置
+  // touchend: function () {
 
-  },
+  // },
 
-  // 动画  未实现
-  newInfo() {
-    var animation = wx.createAnimation({
-      // delay: 0,
-      duration: 200,
-      timingFunction: "linear",
-      // transformOrigin: 'transformOrigin',
-    });
+  // // 动画  未实现
+  // newInfo() {
+  //   var animation = wx.createAnimation({
+  //     // delay: 0,
+  //     duration: 200,
+  //     timingFunction: "linear",
+  //     // transformOrigin: 'transformOrigin',
+  //   });
 
-    this.animation = animation
-    animation.translateX(-75).step()
-    this.setData({
-      aniData: animation.export()
-    })
-  },
+  //   this.animation = animation
+  //   animation.translateX(-75).step()
+  //   this.setData({
+  //     aniData: animation.export()
+  //   })
+  // },
 
 
   onClick: function (e) {
-    this.setData({
-      editCard: true,
-    });
-    this.newInfo();
+    // this.setData({
+    //   editCard: true,
+    // });
+    // this.newInfo();
 
     // 获取当前点击按钮对应标签的index，通过index参数查询本地缓存数据
     let index = e.currentTarget.dataset.index;

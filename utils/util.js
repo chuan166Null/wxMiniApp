@@ -21,14 +21,24 @@ const formatNumber = n => {
 // var year = new Date().getFullYear();
 // var month1 = new Date().getMonth() + 1;
 const calDate = function (year, month1, setD) {
+  function eDate () {
+    let nowTime = formatTime(new Date());
+    nowTime = Date.parse(nowTime);
+    let item = [year, month1, setD];
+    let endTime = formatTime(new Date(item));
+    endTime = Date.parse(endTime);
+    let endDate = Math.floor((endTime - nowTime) / (1000 * 60 * 60 * 24)) + 1;
+    console.log(endDate)
+    return endDate;
+  };
+  let endDate = eDate();
+  if (endDate < 0) {
+    month1++;
+    console.log(endDate)
+    let endDate = calDate(year, month1, setD);
+    return endDate
+  }
 
-  let nowTime = formatTime(new Date());
-  nowTime = Date.parse(nowTime);
-  let item = [year, month1, setD];
-  let endTime = formatTime(new Date(item));
-  endTime = Date.parse(endTime);
-  let endDate = Math.floor((endTime - nowTime) / (1000 * 60 * 60 * 24)) + 1;
-  console.log(endDate)
   if (endDate === 0) {
     let cals = { calD: endDate, month: month1, info: '今', t: '天' };
     return cals
@@ -41,19 +51,10 @@ const calDate = function (year, month1, setD) {
   } else if (endDate > 0 && endDate !== 0 && endDate !== 1 && endDate !== 2) {
     let cals = { calD: endDate, month: month1, info: '天后' };
     return cals
-  } else if (endDate < 0) {
-    month1++;
-    console.log(endDate)
-    // let endD = Math.abs(endDate);
-    let endDate = calDate(year, month1, setD);
-    let cals = { calD: endDate, month: month1, info: '天后' };
-    return cals
-    // return endDate
   };
 
   return endDate
 };
-// calDate(year, month1, 12)
 
 module.exports = {
   formatTime: formatTime,

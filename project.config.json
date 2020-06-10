@@ -27,7 +27,7 @@
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.11.0",
-	"appid": "wx7ae3244d7966e0ee",
+	"appid": "wxd6be544efdc6b866",
 	"projectname": "%E5%8D%A1%E5%8C%85",
 	"debugOptions": {
 		"hidedInDevtools": []
@@ -61,8 +61,8 @@
 			"list": [
 				{
 					"id": 0,
-					"name": "pages/promo/promo",
-					"pathName": "pages/promo/promo",
+					"name": "pages/index/index",
+					"pathName": "pages/index/index",
 					"query": "",
 					"scene": null
 				}

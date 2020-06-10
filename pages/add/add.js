@@ -179,6 +179,9 @@ Page({
         if (a.edit) {
             var cardKey = String(a.index);
             var cardId = parseInt(cardKey);
+            wx.setNavigationBarTitle({
+              title: '卡包/修改卡片',
+            })
         } else {
             cardKey = false;
             cardId = false;
